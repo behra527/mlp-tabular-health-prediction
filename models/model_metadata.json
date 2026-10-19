@@ -1,0 +1,92 @@
+{
+  "project_name": "Tabular Health Prediction",
+  "dataset": "UCI CDC Diabetes Health Indicators",
+  "uci_dataset_id": 891,
+  "target_column": "Diabetes_binary",
+  "target_mapping": {
+    "0": "No diabetes",
+    "1": "Prediabetes/diabetes"
+  },
+  "input_features": [
+    "HighBP",
+    "HighChol",
+    "CholCheck",
+    "BMI",
+    "Smoker",
+    "Stroke",
+    "HeartDiseaseorAttack",
+    "PhysActivity",
+    "Fruits",
+    "Veggies",
+    "HvyAlcoholConsump",
+    "AnyHealthcare",
+    "NoDocbcCost",
+    "GenHlth",
+    "MentHlth",
+    "PhysHlth",
+    "DiffWalk",
+    "Sex",
+    "Age",
+    "Education",
+    "Income"
+  ],
+  "number_of_features": 21,
+  "mlp": {
+    "architecture": [
+      21,
+      64,
+      32,
+      1
+    ],
+    "dropout": [
+      0.3,
+      0.2
+    ],
+    "checkpoint_file": "health_mlp_best.pt",
+    "threshold": 0.67,
+    "best_epoch": 30,
+    "best_validation_loss": 0.8535919785499573,
+    "positive_class_weight": 6.139206562031706
+  },
+  "random_forest": {
+    "file": "random_forest.joblib",
+    "threshold": 0.4,
+    "n_estimators": 200,
+    "min_samples_leaf": 2
+  },
+  "preprocessor_file": "preprocessor.joblib",
+  "split_sizes": {
+    "train": 181036,
+    "validation": 36323,
+    "test": 36321
+  },
+  "test_metrics": [
+    {
+      "Model": "MLP",
+      "Threshold": 0.67,
+      "Accuracy": 0.814708,
+      "Precision": 0.391591,
+      "Recall": 0.616182,
+      "F1-score": 0.47886,
+      "ROC-AUC": 0.836965,
+      "Average Precision": 0.441048
+    },
+    {
+      "Model": "Random Forest",
+      "Threshold": 0.4,
+      "Accuracy": 0.808761,
+      "Precision": 0.379198,
+      "Recall": 0.603029,
+      "F1-score": 0.46561,
+      "ROC-AUC": 0.825332,
+      "Average Precision": 0.41775
+    }
+  ],
+  "environment": {
+    "python_torch_version": "2.11.0+cpu",
+    "numpy_version": "2.1.3",
+    "pandas_version": "2.2.3",
+    "scikit_learn_version": "1.6.1"
+  },
+  "warning": "Educational model only. Not clinically validated and not intended for medical diagnosis."
+}
